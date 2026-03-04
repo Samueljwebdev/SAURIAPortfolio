@@ -124,6 +124,7 @@ button{font-family:inherit;border:none;cursor:none;background:none}
   background:var(--red);z-index:10000;
   transform-origin:left;transform:scaleX(0);
   will-change:transform;
+  width:100%;
 }
 
 /* ═══════════════════════════════════════
@@ -213,7 +214,7 @@ button{font-family:inherit;border:none;cursor:none;background:none}
 .hero-eyebrow .line{width:32px;height:1px;background:var(--red)}
 .hero-headline{
   font-family:var(--display);font-weight:800;
-  font-size:clamp(46px,8vw,110px);
+  font-size:clamp(56px,10vw,140px);
   line-height:.96;letter-spacing:-.03em;
   margin-bottom:32px;
   overflow:hidden;
@@ -226,6 +227,17 @@ button{font-family:inherit;border:none;cursor:none;background:none}
 }
 .hero-headline .word.up{transform:translateY(0)}
 .hero-headline .line-break{display:block}
+
+/* Scramble character styling */
+.hero-headline .word .char{
+  display:inline-block;
+  transition:color .1s;
+}
+.hero-headline .word .char.scrambling{
+  color:var(--red);
+  opacity:.6;
+}
+
 .hero-sub{
   font-size:clamp(16px,1.6vw,19px);line-height:1.7;
   color:var(--muted);max-width:500px;margin-bottom:44px;
@@ -366,7 +378,7 @@ button{font-family:inherit;border:none;cursor:none;background:none}
   font-size:clamp(24px,3.2vw,38px);line-height:1.25;
   max-width:560px;margin-bottom:72px;
 }
-.services-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06)}
+.services-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06)}
 .service-card{
   background:rgba(255,255,255,.02);padding:40px 32px;
   position:relative;transition:background .3s,transform .3s var(--ease-out-expo);
@@ -378,6 +390,25 @@ button{font-family:inherit;border:none;cursor:none;background:none}
 }
 .service-card:hover{background:rgba(255,255,255,.04);transform:translateY(-3px)}
 .service-card:hover::before{width:3px}
+
+/* Featured card — Sprint + Motion */
+.service-card.featured{
+  background:rgba(230,48,34,0.06);
+}
+.service-card.featured::before{
+  width:3px;
+}
+.service-card.featured:hover::before{
+  width:5px;
+}
+.service-badge{
+  position:absolute;top:16px;right:16px;
+  font-family:var(--mono);font-size:8px;letter-spacing:.12em;
+  color:var(--red);border:1px solid var(--red);
+  padding:3px 8px;text-transform:uppercase;
+  line-height:1;
+}
+
 .service-num{
   font-family:var(--mono);font-size:9px;letter-spacing:.14em;
   color:rgba(255,255,255,.15);margin-bottom:24px;
@@ -424,6 +455,19 @@ button{font-family:inherit;border:none;cursor:none;background:none}
 }
 .stack-pill:hover{border-color:var(--red);color:var(--black);transform:translateY(-2px)}
 
+/* Motion cluster pills */
+.stack-pill.motion{
+  border-color:rgba(230,48,34,0.45);
+  background:rgba(230,48,34,0.04);
+  color:var(--muted);
+}
+.stack-pill.motion:hover{
+  border-color:var(--red);
+  color:var(--black);
+  background:rgba(230,48,34,0.08);
+  transform:translateY(-2px);
+}
+
 /* ═══════════════════════════════════════
    SYSTEM STATUS
    ═══════════════════════════════════════ */
@@ -445,7 +489,7 @@ button{font-family:inherit;border:none;cursor:none;background:none}
 .sys-note{font-family:var(--mono);font-size:9px;color:#333;letter-spacing:.1em;text-align:center;margin-top:28px}
 
 /* ═══════════════════════════════════════
-   CLOSING CTA
+   CLOSING CTA + CONTACT FORM
    ═══════════════════════════════════════ */
 .cta-final{
   background:var(--black);color:#fff;padding:140px 48px;text-align:center;
@@ -465,16 +509,95 @@ button{font-family:inherit;border:none;cursor:none;background:none}
   font-size:18px;line-height:1.7;color:rgba(255,255,255,.4);
   max-width:400px;margin:0 auto 48px;position:relative;
 }
-.cta-big{
-  display:inline-block;font-family:var(--mono);font-size:14px;letter-spacing:.12em;
-  padding:20px 48px;background:var(--red);color:#fff;
-  transition:all .3s var(--ease-out-expo);position:relative;text-transform:uppercase;
-}
-.cta-big:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 32px rgba(230,48,34,.25)}
 .cta-final-meta{
   font-family:var(--mono);font-size:9px;letter-spacing:.12em;
   color:#444;margin-top:40px;position:relative;
 }
+
+/* Contact form */
+.contact-form{
+  max-width:520px;margin:0 auto;position:relative;text-align:left;
+}
+.contact-form .form-row{
+  margin-bottom:20px;
+}
+.contact-form label{
+  display:block;
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;
+  color:rgba(255,255,255,.35);text-transform:uppercase;
+  margin-bottom:8px;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea{
+  width:100%;
+  background:var(--black);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.08);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  padding:14px 16px;
+  outline:none;
+  transition:border-color .25s var(--ease-out-expo);
+  -webkit-appearance:none;
+  appearance:none;
+  border-radius:0;
+}
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus{
+  border-color:var(--red);
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{
+  color:rgba(255,255,255,.18);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.1em;
+}
+.contact-form select{
+  cursor:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+  padding-right:40px;
+}
+.contact-form select option{
+  background:var(--black);color:#fff;
+  font-family:var(--mono);font-size:10px;
+}
+.contact-form textarea{
+  resize:vertical;min-height:100px;
+}
+.contact-form .form-submit{
+  width:100%;
+  background:var(--red);
+  color:#fff;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:18px 16px;
+  border:1px solid var(--red);
+  cursor:none;
+  transition:all .3s var(--ease-out-expo);
+  margin-top:8px;
+}
+.contact-form .form-submit:hover{
+  background:var(--red-dark);
+  border-color:var(--red-dark);
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(230,48,34,.25);
+}
+.contact-fallback{
+  font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  color:#444;margin-top:28px;text-align:center;position:relative;
+}
+.contact-fallback a{
+  color:rgba(255,255,255,.35);transition:color .25s;
+}
+.contact-fallback a:hover{color:var(--red)}
 
 /* ═══════════════════════════════════════
    FOOTER
@@ -521,9 +644,11 @@ button{font-family:inherit;border:none;cursor:none;background:none}
 /* ═══════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════ */
+@media(max-width:1100px){
+  .services-row{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:900px){
   .work-grid{grid-template-columns:repeat(2,1fr)}
-  .services-row{grid-template-columns:1fr}
   .process-steps{grid-template-columns:repeat(2,1fr);gap:40px 0}
   .process-steps::after{display:none}
 }
@@ -543,6 +668,7 @@ button{font-family:inherit;border:none;cursor:none;background:none}
   .work-header{flex-direction:column;align-items:flex-start}
   .work-sub{text-align:left}
   .services{padding:80px 20px}
+  .services-row{grid-template-columns:1fr}
   .process{padding:80px 20px}
   .process-steps{grid-template-columns:1fr;gap:40px}
   .stack{padding:80px 20px}
@@ -553,9 +679,7 @@ button{font-family:inherit;border:none;cursor:none;background:none}
   .btn{text-align:center}
 }
 @media(max-width:480px){
-  .hero-headline{font-size:38px}
   .about-stats{gap:28px}
-  .cta-big{padding:18px 32px;font-size:12px}
 }
 </style>
 </head>
@@ -588,7 +712,7 @@ button{font-family:inherit;border:none;cursor:none;background:none}
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-<a href="#" class="nav-logo">S<span style="color:#e63022">A</span>URIA</a>
+  <a href="#" class="nav-logo">S<span style="color:#e63022">A</span>URIA</a>
   <div class="nav-center">
     <a href="#work">Work</a>
     <a href="#services">Services</a>
@@ -621,13 +745,13 @@ button{font-family:inherit;border:none;cursor:none;background:none}
       <span class="line"></span>AI CREATIVE DIRECTION
     </div>
     <h1 class="hero-headline" id="heroHL">
-      <span class="word-wrap"><span class="word">THE</span></span>
-      <span class="word-wrap"><span class="word">VISUAL</span></span>
-      <span class="word-wrap"><span class="word">SYSTEM</span></span>
+      <span class="word-wrap"><span class="word" data-text="THE">THE</span></span>
+      <span class="word-wrap"><span class="word" data-text="VISUAL">VISUAL</span></span>
+      <span class="word-wrap"><span class="word" data-text="SYSTEM">SYSTEM</span></span>
       <span class="line-break"></span>
-      <span class="word-wrap"><span class="word">BEHIND</span></span>
-      <span class="word-wrap"><span class="word">THE</span></span>
-      <span class="word-wrap"><span class="word">BRAND</span></span>
+      <span class="word-wrap"><span class="word" data-text="BEHIND">BEHIND</span></span>
+      <span class="word-wrap"><span class="word" data-text="THE">THE</span></span>
+      <span class="word-wrap"><span class="word" data-text="BRAND">BRAND</span></span>
     </h1>
     <p class="hero-sub" id="heroSub">AI Creative Direction for brands that refuse to look like everything else. Visual architecture. Built to last.</p>
     <div class="hero-actions" id="heroActions">
@@ -644,18 +768,21 @@ button{font-family:inherit;border:none;cursor:none;background:none}
     <span>AI CREATIVE DIRECTION</span><span class="sep">//</span>
     <span>VISUAL ARCHITECTURE</span><span class="sep">//</span>
     <span>BRAND SYSTEMS</span><span class="sep">//</span>
+    <span>AI VIDEO PRODUCTION</span><span class="sep">//</span>
     <span>PROMPT ENGINEERING</span><span class="sep">//</span>
     <span>SOUTH COAST UK</span><span class="sep">//</span>
     <span>SAURIA.STUDIO</span><span class="sep">//</span>
     <span>AI CREATIVE DIRECTION</span><span class="sep">//</span>
     <span>VISUAL ARCHITECTURE</span><span class="sep">//</span>
     <span>BRAND SYSTEMS</span><span class="sep">//</span>
+    <span>AI VIDEO PRODUCTION</span><span class="sep">//</span>
     <span>PROMPT ENGINEERING</span><span class="sep">//</span>
     <span>SOUTH COAST UK</span><span class="sep">//</span>
     <span>SAURIA.STUDIO</span><span class="sep">//</span>
     <span>AI CREATIVE DIRECTION</span><span class="sep">//</span>
     <span>VISUAL ARCHITECTURE</span><span class="sep">//</span>
     <span>BRAND SYSTEMS</span><span class="sep">//</span>
+    <span>AI VIDEO PRODUCTION</span><span class="sep">//</span>
     <span>PROMPT ENGINEERING</span><span class="sep">//</span>
     <span>SOUTH COAST UK</span><span class="sep">//</span>
     <span>SAURIA.STUDIO</span><span class="sep">//</span>
@@ -762,7 +889,7 @@ button{font-family:inherit;border:none;cursor:none;background:none}
 <section class="services" id="services">
   <div class="services-container">
     <div class="reveal" style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:#555;margin-bottom:12px">ENGAGEMENT MODELS</div>
-    <div class="services-intro reveal reveal-d1">THREE WAYS TO WORK TOGETHER. EACH BUILT AROUND A DIFFERENT PROBLEM.</div>
+    <div class="services-intro reveal reveal-d1">FOUR WAYS TO WORK TOGETHER. EACH BUILT AROUND A DIFFERENT PROBLEM.</div>
     <div class="services-row">
       <div class="service-card reveal reveal-d1">
         <div class="service-num">01</div>
@@ -772,16 +899,25 @@ button{font-family:inherit;border:none;cursor:none;background:none}
         <div class="service-desc">Brand visual system built. Audit, 3 directions, 20–30 AI images, prompt library, Figma guidelines, Canva templates, handoff.</div>
         <div class="service-tag">DELIVERABLE: COMPLETE_VISUAL_SYSTEM</div>
       </div>
-      <div class="service-card reveal reveal-d2">
+      <div class="service-card featured reveal reveal-d2">
+        <span class="service-badge">NEW</span>
         <div class="service-num">02</div>
+        <div class="service-name">SPRINT + MOTION</div>
+        <div class="service-price">£24–26K</div>
+        <div class="service-dur">4 WEEKS FIXED</div>
+        <div class="service-desc">Everything in The Sprint, plus 3–5 motion assets — looping brand films, animated sequences. Kling/Veo/Runway pipeline. Motion prompt library included.</div>
+        <div class="service-tag">DELIVERABLE: VISUAL_SYSTEM + MOTION_PACKAGE</div>
+      </div>
+      <div class="service-card reveal reveal-d3">
+        <div class="service-num">03</div>
         <div class="service-name">THE RETAINER</div>
         <div class="service-price">£16–22K/MONTH</div>
         <div class="service-dur">3 MONTH MINIMUM</div>
         <div class="service-desc">Fractional AI Creative Director. Weekly sessions, 20–40 images/month, prompt library maintenance, async access, quarterly audit.</div>
         <div class="service-tag">DELIVERABLE: ONGOING_CREATIVE_DIRECTION</div>
       </div>
-      <div class="service-card reveal reveal-d3">
-        <div class="service-num">03</div>
+      <div class="service-card reveal reveal-d4">
+        <div class="service-num">04</div>
         <div class="service-name">SYSTEM BUILD</div>
         <div class="service-price">£35–75K</div>
         <div class="service-dur">6–12 WEEKS</div>
@@ -839,11 +975,14 @@ button{font-family:inherit;border:none;cursor:none;background:none}
       <span class="stack-pill">COMFYUI</span>
       <span class="stack-pill">STABLE DIFFUSION</span>
       <span class="stack-pill">KREA AI</span>
-      <span class="stack-pill">RUNWAY</span>
-      <span class="stack-pill">KLING</span>
       <span class="stack-pill">FIGMA</span>
       <span class="stack-pill">CANVA</span>
       <span class="stack-pill">CUSTOM LORA MODELS</span>
+      <span class="stack-pill motion">RUNWAY GEN-4.5</span>
+      <span class="stack-pill motion">KLING 3.0</span>
+      <span class="stack-pill motion">VEO 3.1</span>
+      <span class="stack-pill motion">SEEDANCE 2.0</span>
+      <span class="stack-pill motion">DAVINCI RESOLVE</span>
     </div>
   </div>
 </section>
@@ -870,7 +1009,38 @@ button{font-family:inherit;border:none;cursor:none;background:none}
   <div class="cta-final-bg"></div>
   <h2 class="reveal">READY TO BUILD?</h2>
   <p class="reveal reveal-d1">One conversation. No deck required. Just tell us what you're building.</p>
-  <a href="mailto:hello@sauria.studio" class="cta-big cta-el reveal reveal-d2">HELLO@SAURIA.STUDIO</a>
+  <div class="contact-form reveal reveal-d2">
+    <form action="mailto:hello@sauria.studio" method="POST" enctype="text/plain">
+      <div class="form-row">
+        <label for="cf-name">NAME</label>
+        <input type="text" id="cf-name" name="Name" required>
+      </div>
+      <div class="form-row">
+        <label for="cf-email">EMAIL</label>
+        <input type="email" id="cf-email" name="Email" required>
+      </div>
+      <div class="form-row">
+        <label for="cf-tier">ENGAGEMENT TIER</label>
+        <select id="cf-tier" name="Tier" required>
+          <option value="" disabled selected>Select a tier</option>
+          <option value="The Sprint — £18K">The Sprint — £18K</option>
+          <option value="Sprint + Motion — £24–26K">Sprint + Motion — £24–26K</option>
+          <option value="The Retainer — £16–22K/mo">The Retainer — £16–22K/mo</option>
+          <option value="System Build — £35–75K">System Build — £35–75K</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="cf-timeline">TIMELINE</label>
+        <input type="text" id="cf-timeline" name="Timeline" placeholder="When do you need to start?">
+      </div>
+      <div class="form-row">
+        <label for="cf-brief">BRIEF</label>
+        <textarea id="cf-brief" name="Brief" rows="4" placeholder="What are you building?"></textarea>
+      </div>
+      <button type="submit" class="form-submit cta-el">SEND BRIEF</button>
+    </form>
+    <div class="contact-fallback">Or reach out directly → <a href="mailto:hello@sauria.studio">hello@sauria.studio</a></div>
+  </div>
   <div class="cta-final-meta reveal reveal-d3">STATUS: [ACCEPTING_CLIENTS] // SOUTH COAST UK // 2026</div>
 </section>
 
@@ -925,13 +1095,70 @@ function endBoot(){
 })();
 
 /* ═══════════════════════════════════════
+   TEXT SCRAMBLE — AWWWARDS UPGRADE
+   Each hero word decrypts from random glyphs
+   ═══════════════════════════════════════ */
+const GLYPHS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
+
+function scrambleWord(wordEl,delay){
+  const final=wordEl.getAttribute('data-text');
+  if(!final)return;
+  const len=final.length;
+  // Build char spans
+  wordEl.innerHTML='';
+  const chars=[];
+  for(let i=0;i<len;i++){
+    const span=document.createElement('span');
+    span.className='char scrambling';
+    span.textContent=GLYPHS[Math.floor(Math.random()*GLYPHS.length)];
+    wordEl.appendChild(span);
+    chars.push(span);
+  }
+  // Scramble cycle then resolve left-to-right
+  const totalDuration=600; // ms for full resolve
+  const perChar=totalDuration/len;
+  const scrambleInterval=40;
+  let elapsed=0;
+  const resolved=new Array(len).fill(false);
+
+  setTimeout(()=>{
+    const interval=setInterval(()=>{
+      elapsed+=scrambleInterval;
+      const resolveUpTo=Math.floor(elapsed/perChar);
+      for(let i=0;i<len;i++){
+        if(i<resolveUpTo&&!resolved[i]){
+          resolved[i]=true;
+          chars[i].textContent=final[i];
+          chars[i].classList.remove('scrambling');
+        }else if(!resolved[i]){
+          chars[i].textContent=GLYPHS[Math.floor(Math.random()*GLYPHS.length)];
+        }
+      }
+      if(resolveUpTo>=len){
+        clearInterval(interval);
+        // Ensure all resolved
+        for(let i=0;i<len;i++){
+          chars[i].textContent=final[i];
+          chars[i].classList.remove('scrambling');
+        }
+      }
+    },scrambleInterval);
+  },delay);
+}
+
+/* ═══════════════════════════════════════
    HERO REVEAL
    ═══════════════════════════════════════ */
 function heroIn(){
   const ey=document.getElementById('heroEyebrow');
   ey.style.opacity='1';ey.style.transform='translateY(0)';
-  document.querySelectorAll('.hero-headline .word').forEach((w,i)=>{
-    setTimeout(()=>w.classList.add('up'),70*i);
+  const words=document.querySelectorAll('.hero-headline .word');
+  words.forEach((w,i)=>{
+    setTimeout(()=>{
+      w.classList.add('up');
+      // Fire scramble once word starts rising
+      scrambleWord(w,0);
+    },70*i);
   });
   setTimeout(()=>document.getElementById('heroSub').classList.add('on'),500);
   setTimeout(()=>document.getElementById('heroActions').classList.add('on'),650);
