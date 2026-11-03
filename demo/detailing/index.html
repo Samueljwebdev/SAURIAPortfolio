@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Halcyon Auto Studio — Demo Quote Site</title>
+<meta name="description" content="Demo: a branded quote-request site for detailing, ceramic coating and PPF studios. Fictional business, sample prices.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0c0e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0c0e;--bg2:#121418;--card:#16191e;--line:#262a31;--ink:#f2f3f5;--muted:#9aa1ab;--dim:#6b727c;
+  --accent:#7fe3d6;--accent-ink:#06211d;--warn:#f2c76b;
+  --radius:14px;--display:'Archivo',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--display);line-height:1.08;letter-spacing:-.02em}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.muted{color:var(--muted)}
+
+/* demo banner */
+.demo-bar{background:var(--warn);color:#2a1e00;font-size:13px;text-align:center;padding:8px 16px;font-weight:500}
+.demo-bar a{font-weight:600}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(11,12,14,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.head{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-mark{width:26px;height:26px;border-radius:50%;background:conic-gradient(from 200deg,var(--accent),#2b6f68,var(--accent));box-shadow:0 0 18px rgba(127,227,214,.35)}
+nav.links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+nav.links a{text-decoration:none}nav.links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:12px 20px;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;transition:transform .15s,background .2s,opacity .2s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--muted)}
+.btn-wa{background:#25d366;color:#05230f}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn-sm{padding:9px 16px;font-size:14px}
+
+/* hero */
+.hero{position:relative;padding:72px 0 56px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:720px;height:720px;background:radial-gradient(closest-side,rgba(127,227,214,.16),transparent 70%);pointer-events:none}
+.hero h1{font-size:clamp(38px,7vw,72px);font-weight:800;max-width:14ch;margin:14px 0 18px}
+.hero p.lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:44ch}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:36px;font-size:14px;color:var(--muted)}
+.facts span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+
+section{padding:64px 0}
+.sec-head{margin-bottom:28px}
+.sec-head h2{font-size:clamp(28px,4.4vw,42px);margin-top:10px}
+.sec-head p{color:var(--muted);margin-top:10px;max-width:56ch}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:10px}
+.svc h3{font-size:20px}
+.svc .from{font-family:var(--display);font-size:15px;color:var(--accent);font-weight:600}
+.svc p{font-size:14.5px;color:var(--muted);flex:1}
+.svc ul{list-style:none;font-size:14px;color:var(--muted);display:grid;gap:4px}
+.svc li::before{content:"— ";color:var(--dim)}
+.svc .btn{align-self:flex-start;margin-top:6px}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.shot{position:relative;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+  background:
+    radial-gradient(120% 70% at 30% 110%,rgba(127,227,214,.22),transparent 60%),
+    linear-gradient(160deg,#1d2127,#0e1013 70%)}
+.shot:nth-child(2){background:radial-gradient(90% 60% at 80% 0%,rgba(255,255,255,.12),transparent 60%),linear-gradient(200deg,#23262c,#0d0f12)}
+.shot:nth-child(3){background:radial-gradient(80% 80% at 50% 50%,rgba(242,199,107,.14),transparent 60%),linear-gradient(140deg,#1a1c20,#0c0d10)}
+.shot:nth-child(4){background:linear-gradient(120deg,#0f1114,#20252b 50%,#0f1114)}
+.shot:nth-child(5){background:radial-gradient(100% 60% at 0% 100%,rgba(127,227,214,.18),transparent 60%),#121417}
+.shot:nth-child(6){background:radial-gradient(60% 60% at 70% 30%,rgba(255,255,255,.1),transparent 70%),linear-gradient(180deg,#1b1e23,#0b0c0e)}
+.shot .tag{position:absolute;left:12px;bottom:12px;right:12px;display:flex;justify-content:space-between;gap:8px;font-size:12.5px}
+.shot .tag b{font-weight:600}
+.shot .ph{position:absolute;top:12px;left:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--warn);background:rgba(0,0,0,.45);padding:4px 8px;border-radius:6px}
+.shot svg{position:absolute;inset:0;margin:auto;width:62%;opacity:.16}
+
+/* quote builder */
+#quote{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.q-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;align-items:start}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:14px}
+.step-h{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.step-n{font-family:var(--display);font-weight:800;color:var(--accent);font-size:14px;letter-spacing:.08em}
+.step-h h3{font-size:19px}
+.step-h small{color:var(--dim);font-size:13px;margin-left:auto}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt label{display:flex;flex-direction:column;gap:3px;height:100%;padding:14px;border:1px solid var(--line);border-radius:12px;cursor:pointer;background:var(--bg2);transition:border-color .15s,background .15s}
+.opt label:hover{border-color:#3a3f48}
+.opt input:checked+label{border-color:var(--accent);background:rgba(127,227,214,.07);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt input:focus-visible+label{outline:2px solid var(--accent);outline-offset:2px}
+.opt b{font-weight:600;font-size:15px}
+.opt span{font-size:13px;color:var(--muted)}
+.opt em{font-style:normal;font-size:13px;color:var(--accent);margin-top:auto;padding-top:4px}
+.svc-group{margin-bottom:16px}
+.svc-group:last-child{margin-bottom:0}
+.svc-group h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:8px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;color:var(--muted)}
+.field label i{font-style:normal;color:var(--dim)}
+.field input,.field select,.field textarea{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 13px;font-size:16px;width:100%}
+.field textarea{min-height:88px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+.field.err input{border-color:#ff7a7a}
+
+/* summary */
+.summary{position:sticky;top:84px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.summary h3{font-size:17px;margin-bottom:14px}
+.sum-rows{display:grid;gap:9px;font-size:14px;margin-bottom:16px}
+.sum-row{display:flex;justify-content:space-between;gap:12px}
+.sum-row span:first-child{color:var(--muted)}
+.sum-row span:last-child{text-align:right}
+.price{border-top:1px solid var(--line);padding-top:16px;margin-bottom:16px}
+.price small{display:block;color:var(--muted);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+.price strong{display:block;font-family:var(--display);font-size:34px;font-weight:800;letter-spacing:-.02em;margin:4px 0}
+.price p{font-size:12.5px;color:var(--dim)}
+.summary .btn{width:100%;margin-top:8px}
+.hint{font-size:13px;color:var(--warn);margin-top:10px;min-height:1em}
+.preview{margin-top:14px}
+.preview summary{font-size:13px;color:var(--muted);cursor:pointer}
+.preview pre{white-space:pre-wrap;font-family:var(--body);font-size:13px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:8px;color:var(--muted)}
+
+/* how it works */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.how div{border-top:1px solid var(--line);padding-top:16px}
+.how b{font-family:var(--display);color:var(--accent);font-size:14px;letter-spacing:.08em}
+.how h3{font-size:19px;margin:6px 0}
+.how p{color:var(--muted);font-size:14.5px}
+
+/* faq */
+.faq details{border-bottom:1px solid var(--line);padding:16px 0}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::after{content:"+";color:var(--accent);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);margin-top:10px;font-size:15px;max-width:70ch}
+
+footer{padding:40px 0 120px;color:var(--dim);font-size:13.5px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+
+/* mobile sticky bar */
+.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(18,20,24,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:12px}
+.mbar small{display:block;color:var(--muted);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.mbar strong{font-family:var(--display);font-size:20px}
+
+.toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:all .25s;z-index:80}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .q-layout{grid-template-columns:1fr}
+  .summary{position:static}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .how{grid-template-columns:1fr}
+  nav.links{display:none}
+  .mbar{display:flex}
+}
+@media (max-width:520px){
+  .fields{grid-template-columns:1fr}
+  .opts{grid-template-columns:1fr 1fr}
+  .opts.single{grid-template-columns:1fr}
+  .hero{padding:48px 0 40px}
+  section{padding:52px 0}
+  .step{padding:18px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Demo site by <a href="https://sauria.studio">SAURIA</a> · fictional business, sample prices and placeholder images</div>
+
+<header>
+  <div class="wrap head">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span><span data-bind="name">HALCYON</span></a>
+    <nav class="links"><a href="#services">Services</a><a href="#work">Work</a><a href="#how">How it works</a><a href="#faq">FAQ</a></nav>
+    <a class="btn btn-primary btn-sm" href="#quote">Get a quote</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div class="eyebrow" data-bind="area">Detailing · Ceramic · PPF</div>
+      <h1 data-bind="headline">Paint protection, done properly.</h1>
+      <p class="lead" data-bind="intro">Pick your car and the service you want, see an indicative price in seconds, then send us the details on WhatsApp. We'll confirm a date and a final price.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#quote">Build your quote</a>
+        <a class="btn btn-ghost" href="#services">View services</a>
+      </div>
+      <div class="facts" id="facts"></div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Services</div>
+        <h2>What we do</h2>
+        <p>Prices shown are starting points for a small car in good condition. Use the quote builder for your vehicle.</p>
+      </div>
+      <div class="svc-grid" id="svcGrid"></div>
+    </div>
+  </section>
+
+  <section id="work" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Recent work</div>
+        <h2>From the studio</h2>
+        <p>On a live site these are the business's own photos of finished cars.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <section id="quote">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Quote builder</div>
+        <h2>Get an indicative price</h2>
+        <p>Three quick steps. Nothing is booked until we've confirmed it with you.</p>
+      </div>
+
+      <div class="q-layout">
+        <form id="qForm" novalidate>
+          <div class="step">
+            <div class="step-h"><span class="step-n">01</span><h3>Your vehicle</h3></div>
+            <div class="opts" id="sizeOpts" role="radiogroup" aria-label="Vehicle size"></div>
+            <div class="fields" style="margin-top:14px">
+              <div class="field full"><label for="vehicle">Make and model <i>(e.g. 2021 BMW 3 Series)</i></label><input id="vehicle" name="vehicle" autocomplete="off"></div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-h"><span class="step-n">02</span><h3>Service</h3></div>
+            <div id="svcOpts"></div>
+          </div>
+
+          <div class="step">
+            <div class="step-h"><span class="step-n">03</span><h3>Extras and condition</h3><small>Optional</small></div>
+            <div class="svc-group">
+              <h4>Add-ons</h4>
+              <div class="opts" id="addonOpts"></div>
+            </div>
+            <div class="svc-group" id="condGroup">
+              <h4>Paint condition</h4>
+              <div class="opts" id="condOpts" role="radiogroup" aria-label="Paint condition"></div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-h"><span class="step-n">04</span><h3>Your details</h3></div>
+            <div class="fields">
+              <div class="field" id="fName"><label for="name">Name</label><input id="name" name="name" autocomplete="name"></div>
+              <div class="field"><label for="postcode">Postcode <i>(first half is fine)</i></label><input id="postcode" name="postcode" autocomplete="postal-code"></div>
+              <div class="field"><label for="date">Preferred date <i>(optional)</i></label><input id="date" name="date" type="date"></div>
+              <div class="field"><label for="where">Where</label><select id="where" name="where"></select></div>
+              <div class="field full"><label for="notes">Anything else? <i>(swirls, stone chips, recent respray…)</i></label><textarea id="notes" name="notes"></textarea></div>
+            </div>
+          </div>
+        </form>
+
+        <aside class="summary" id="summary" aria-live="polite">
+          <h3>Your quote</h3>
+          <div class="sum-rows" id="sumRows"></div>
+          <div class="price">
+            <small>Indicative price</small>
+            <strong id="priceOut">—</strong>
+            <p data-bind="disclaimer">Final price confirmed after we've seen the car. Includes all prep and products.</p>
+          </div>
+          <a class="btn btn-wa" id="waBtn" href="#" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>
+            Send enquiry on WhatsApp
+          </a>
+          <a class="btn btn-ghost" id="bookBtn" href="#" target="_blank" rel="noopener">Check availability</a>
+          <button class="btn btn-ghost" id="copyBtn" type="button">Copy enquiry text</button>
+          <div class="hint" id="hint"></div>
+          <details class="preview"><summary>Preview the message we'll receive</summary><pre id="msgPreview"></pre></details>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">How it works</div><h2>Simple from start to finish</h2></div>
+      <div class="how">
+        <div><b>01</b><h3>Build your quote</h3><p>Choose your car, service and extras. You'll see an indicative price straight away.</p></div>
+        <div><b>02</b><h3>Send it on WhatsApp</h3><p>Your selections arrive as one tidy message. No forms disappearing into an inbox.</p></div>
+        <div><b>03</b><h3>We confirm</h3><p>We'll reply with availability and a final price, usually the same day.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">FAQ</div><h2>Good questions</h2></div>
+      <div class="faq" id="faqList"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><span data-bind="legalName">Halcyon Auto Studio</span> · <span data-bind="address">Sample address</span></span>
+    <span>Site by <a href="https://sauria.studio">SAURIA</a></span>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar">
+  <div><small>Indicative</small><strong id="mPrice">Build a quote</strong></div>
+  <a class="btn btn-wa btn-sm" id="mBtn" href="#quote">Get quote</a>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==========================================================================
+   CONFIG — everything client-specific lives here.
+   Swap this block per customer; the rest of the page builds itself from it.
+   Prices: [low, high] in GBP for a SMALL car in GOOD condition.
+   ========================================================================== */
+const CONFIG = {
+  business: {
+    name: "HALCYON",
+    legalName: "Halcyon Auto Studio (demo)",
+    area: "Detailing · Ceramic · PPF",
+    headline: "Paint protection, done properly.",
+    intro: "Pick your car and the service you want, see an indicative price in seconds, then send us the details on WhatsApp. We'll confirm a date and a final price.",
+    address: "Sample address, Anytown",
+    // International format, digits only. Use ?wa=447XXXXXXXXX in the URL to test with your own number.
+    whatsapp: "447700900000",
+    bookingUrl: "",          // e.g. Calendly / Square / Setmore link. Empty = button hidden.
+    disclaimer: "Final price confirmed after we've seen the car. Includes all prep and products.",
+    facts: ["Sample: fully insured", "Sample: indoor unit", "Sample: mobile service within 15 miles"],
+    locations: ["At your studio", "Mobile (at my address)"]
+  },
+
+  sizes: [
+    { id: "small",  label: "Small",        hint: "Fiesta, Polo, Mini",        mult: 1.00 },
+    { id: "medium", label: "Medium",       hint: "Golf, 3 Series, A4",        mult: 1.15 },
+    { id: "large",  label: "Large / SUV",  hint: "X5, Q7, Range Rover Sport", mult: 1.35 },
+    { id: "xl",     label: "XL / Van",     hint: "Transit, V-Class, pickups", mult: 1.55 }
+  ],
+
+  conditions: [
+    { id: "good",    label: "Good",    hint: "Light swirls",        mult: 1.00 },
+    { id: "average", label: "Average", hint: "Visible swirls",      mult: 1.12 },
+    { id: "poor",    label: "Poor",    hint: "Heavy marring, dull", mult: 1.28 }
+  ],
+
+  // `paint: true` = price scales with paint condition.
+  services: [
+    { group: "Detailing", id: "maint",  name: "Maintenance detail", price: [45, 60],   paint: false,
+      blurb: "Safe wash, decontamination and top-up of existing protection.", incl: ["Snow foam & 2-bucket wash", "Wheels & arches", "Interior vacuum & wipe"] },
+    { group: "Detailing", id: "enh",    name: "Enhancement detail", price: [250, 320], paint: true,
+      blurb: "Single-stage machine polish to lift gloss and remove light swirls.", incl: ["Full decontamination", "1-stage polish", "Sealant"] },
+    { group: "Detailing", id: "corr",   name: "Paint correction",   price: [450, 600], paint: true,
+      blurb: "Multi-stage correction for heavy swirls and marring.", incl: ["Paint depth readings", "2-stage cut & finish", "Sealant"] },
+    { group: "Ceramic coating", id: "cer1", name: "Ceramic, 1 year",  price: [350, 450],  paint: true,
+      blurb: "Entry ceramic with prep polish. Easier washing and deep gloss.", incl: ["Prep polish", "1-layer coating", "Aftercare kit"] },
+    { group: "Ceramic coating", id: "cer3", name: "Ceramic, 3 years", price: [550, 700],  paint: true,
+      blurb: "Our most popular package for daily drivers.", incl: ["Enhancement polish", "2-layer coating", "Wheels faces coated"] },
+    { group: "Ceramic coating", id: "cer5", name: "Ceramic, 5 years", price: [800, 1000], paint: true,
+      blurb: "Maximum durability for new or corrected paint.", incl: ["Correction polish", "Multi-layer coating", "Annual inspection"] },
+    { group: "Paint protection film", id: "ppf1", name: "PPF, front bumper and bonnet edge", price: [750, 950],  paint: false,
+      blurb: "Self-healing film on the highest-impact areas.", incl: ["Bumper", "Leading bonnet edge", "Mirror caps"] },
+    { group: "Paint protection film", id: "ppf2", name: "PPF, full front",  price: [1500, 1900], paint: false,
+      blurb: "Full bonnet, wings, bumper, mirrors and headlights.", incl: ["Full bonnet & wings", "Headlights", "Wrapped edges"] },
+    { group: "Paint protection film", id: "ppf3", name: "PPF, full body",   price: [4200, 5500], paint: false,
+      blurb: "Every painted panel, gloss or satin finish.", incl: ["All painted panels", "Gloss or satin", "10-year film warranty"] }
+  ],
+
+  // `scale: true` = add-on price scales with vehicle size.
+  addons: [
+    { id: "wheels",  name: "Wheels-off ceramic",   price: 180, scale: false },
+    { id: "glass",   name: "Glass coating",        price: 60,  scale: false },
+    { id: "interior",name: "Interior deep clean",  price: 120, scale: true  },
+    { id: "leather", name: "Leather protection",   price: 70,  scale: true  }
+  ],
+
+  faq: [
+    ["Is the price on screen final?", "It's an indicative range based on your selections. We confirm the final price once we've seen the car. Paint condition makes the biggest difference."],
+    ["How long will you need the car?", "Maintenance details take a few hours. Correction and ceramic packages usually take 1–3 days. Full-body PPF can take up to a week."],
+    ["Do I need correction before ceramic?", "Every ceramic package includes prep polishing. If the paint is heavily marked we'll recommend correction first and explain why."],
+    ["Can you come to me?", "Detailing and smaller ceramic jobs can be done mobile if you have cover. PPF and multi-layer ceramic are done in the unit."]
+  ],
+
+  roundTo: 5,
+  currency: "£"
+};
+
+/* ===== URL overrides (for demos & testing) ===== */
+const params = new URLSearchParams(location.search);
+if (/^\d{8,15}$/.test(params.get("wa") || "")) CONFIG.business.whatsapp = params.get("wa");
+if (params.get("book")) CONFIG.business.bookingUrl = params.get("book");
+
+/* ===== helpers ===== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const round = n => Math.round(n / CONFIG.roundTo) * CONFIG.roundTo;
+const money = n => CONFIG.currency + n.toLocaleString("en-GB");
+const range = (a, b) => a === b ? money(a) : `${money(a)}–${money(b)}`;
+const B = CONFIG.business;
+
+/* ===== bind business copy ===== */
+document.querySelectorAll("[data-bind]").forEach(el => { const v = B[el.dataset.bind]; if (v) el.textContent = v; });
+document.title = `${B.legalName.replace(/\s*\(demo\)/i, "")} — Get a quote`;
+$("#facts").innerHTML = B.facts.map(f => `<span>${esc(f)}</span>`).join("");
+$("#where").innerHTML = B.locations.map(l => `<option>${esc(l)}</option>`).join("");
+
+/* ===== services grid ===== */
+$("#svcGrid").innerHTML = CONFIG.services.map(s => `
+  <article class="svc">
+    <div class="eyebrow" style="color:var(--dim)">${esc(s.group)}</div>
+    <h3>${esc(s.name)}</h3>
+    <div class="from">From ${money(s.price[0])}</div>
+    <p>${esc(s.blurb)}</p>
+    <ul>${s.incl.map(i => `<li>${esc(i)}</li>`).join("")}</ul>
+    <a class="btn btn-ghost btn-sm" href="#quote" data-pick="${s.id}">Quote this</a>
+  </article>`).join("");
+
+/* ===== gallery placeholders ===== */
+const carSvg = `<svg viewBox="0 0 200 70" fill="none" stroke="#fff" stroke-width="2"><path d="M8 52h184M20 52c0-10 6-14 16-16l30-14c8-4 18-6 30-6h20c14 0 26 6 36 16l18 4c10 2 16 6 16 16"/><circle cx="52" cy="52" r="11"/><circle cx="150" cy="52" r="11"/></svg>`;
+const shots = [["Ceramic, 3 years","Medium saloon"],["PPF, full front","Large SUV"],["Paint correction","Small hatch"],["Enhancement detail","Estate"],["Wheels-off ceramic","Coupé"],["Interior deep clean","Large SUV"]];
+$("#gallery").innerHTML = shots.map(([a, b]) => `<div class="shot">${carSvg}<span class="ph">Placeholder</span><div class="tag"><b>${esc(a)}</b><span class="muted">${esc(b)}</span></div></div>`).join("");
+
+/* ===== quote builder: render options ===== */
+const radio = (name, id, title, sub, extra = "") =>
+  `<div class="opt"><input type="radio" name="${name}" id="${name}-${id}" value="${id}"><label for="${name}-${id}"><b>${esc(title)}</b>${sub ? `<span>${esc(sub)}</span>` : ""}${extra}</label></div>`;
+
+$("#sizeOpts").innerHTML = CONFIG.sizes.map(s => radio("size", s.id, s.label, s.hint)).join("");
+$("#condOpts").innerHTML = CONFIG.conditions.map(c => radio("cond", c.id, c.label, c.hint)).join("");
+
+const groups = [...new Set(CONFIG.services.map(s => s.group))];
+$("#svcOpts").innerHTML = groups.map(g => `
+  <div class="svc-group"><h4>${esc(g)}</h4><div class="opts">
+    ${CONFIG.services.filter(s => s.group === g).map(s => radio("svc", s.id, s.name, "", `<em data-svc-price="${s.id}"></em>`)).join("")}
+  </div></div>`).join("");
+
+$("#addonOpts").innerHTML = CONFIG.addons.map(a => `
+  <div class="opt"><input type="checkbox" name="addon" id="addon-${a.id}" value="${a.id}">
+  <label for="addon-${a.id}"><b>${esc(a.name)}</b><em data-addon-price="${a.id}"></em></label></div>`).join("");
+
+document.querySelector('input[name="cond"][value="good"]').checked = true;
+
+/* ===== pricing engine ===== */
+function state() {
+  const f = $("#qForm");
+  const get = n => (f.querySelector(`input[name="${n}"]:checked`) || {}).value;
+  return {
+    size: CONFIG.sizes.find(s => s.id === get("size")),
+    svc: CONFIG.services.find(s => s.id === get("svc")),
+    cond: CONFIG.conditions.find(c => c.id === get("cond")),
+    addons: [...f.querySelectorAll('input[name="addon"]:checked')].map(i => CONFIG.addons.find(a => a.id === i.value)),
+    vehicle: $("#vehicle").value.trim(),
+    name: $("#name").value.trim(),
+    postcode: $("#postcode").value.trim().toUpperCase(),
+    date: $("#date").value,
+    where: $("#where").value,
+    notes: $("#notes").value.trim()
+  };
+}
+
+function servicePrice(svc, size, cond) {
+  const m = (size ? size.mult : 1) * (svc.paint && cond ? cond.mult : 1);
+  return [round(svc.price[0] * m), round(svc.price[1] * m)];
+}
+const addonPrice = (a, size) => round(a.price * (a.scale && size ? size.mult : 1));
+
+function quote(s) {
+  if (!s.svc) return null;
+  let [lo, hi] = servicePrice(s.svc, s.size, s.cond);
+  s.addons.forEach(a => { const p = addonPrice(a, s.size); lo += p; hi += p; });
+  return [lo, hi];
+}
+
+/* ===== message ===== */
+function fmtDate(d) {
+  if (!d) return "";
+  const [y, m, day] = d.split("-").map(Number);
+  return new Date(y, m - 1, day).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+}
+
+function message(s, q) {
+  const L = [`Hi ${B.legalName.replace(/\s*\(demo\)/i, "")}, I'd like a quote.`, ""];
+  L.push(`• Vehicle: ${s.vehicle || "not given"}${s.size ? ` (${s.size.label})` : ""}`);
+  L.push(`• Service: ${s.svc ? s.svc.name : "not chosen"}`);
+  if (s.addons.length) L.push(`• Add-ons: ${s.addons.map(a => a.name).join(", ")}`);
+  if (s.svc && s.svc.paint && s.cond) L.push(`• Paint condition: ${s.cond.label}`);
+  if (q) L.push(`• Indicative price shown: ${range(q[0], q[1])}`);
+  L.push(`• Where: ${s.where}`);
+  if (s.postcode) L.push(`• Postcode: ${s.postcode}`);
+  if (s.date) L.push(`• Preferred date: ${fmtDate(s.date)}`);
+  if (s.notes) { L.push("", `Notes: ${s.notes}`); }
+  L.push("", `Name: ${s.name || "—"}`);
+  return L.join("\n");
+}
+
+/* ===== render ===== */
+function render() {
+  const s = state(), q = quote(s);
+
+  // live per-option prices for the selected size/condition
+  CONFIG.services.forEach(svc => {
+    const [a, b] = servicePrice(svc, s.size, s.cond);
+    document.querySelector(`[data-svc-price="${svc.id}"]`).textContent = range(a, b);
+  });
+  CONFIG.addons.forEach(a => { document.querySelector(`[data-addon-price="${a.id}"]`).textContent = "+" + money(addonPrice(a, s.size)); });
+  $("#condGroup").style.opacity = s.svc && !s.svc.paint ? .4 : 1;
+
+  const rows = [
+    ["Vehicle", s.size ? s.size.label + (s.vehicle ? ` · ${s.vehicle}` : "") : "—"],
+    ["Service", s.svc ? s.svc.name : "—"],
+    ["Add-ons", s.addons.length ? s.addons.map(a => a.name).join(", ") : "None"],
+  ];
+  if (s.svc && s.svc.paint) rows.push(["Condition", s.cond.label]);
+  $("#sumRows").innerHTML = rows.map(([k, v]) => `<div class="sum-row"><span>${k}</span><span>${esc(v)}</span></div>`).join("");
+
+  const priceTxt = q ? range(q[0], q[1]) : "—";
+  $("#priceOut").textContent = priceTxt;
+  $("#mPrice").textContent = q ? priceTxt : "Build a quote";
+
+  const msg = message(s, q);
+  $("#msgPreview").textContent = msg;
+
+  const missing = [];
+  if (!s.size) missing.push("vehicle size");
+  if (!s.svc) missing.push("a service");
+  if (!s.name) missing.push("your name");
+  const ready = !missing.length;
+
+  const wa = `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(msg)}`;
+  const waBtn = $("#waBtn");
+  waBtn.href = ready ? wa : "#quote";
+  waBtn.toggleAttribute("aria-disabled", !ready);
+  waBtn.style.opacity = ready ? 1 : .55;
+  $("#hint").textContent = ready ? "" : `To send, add ${missing.join(", ").replace(/, ([^,]*)$/, " and $1")}.`;
+
+  const mBtn = $("#mBtn");
+  if (ready) { mBtn.href = wa; mBtn.target = "_blank"; mBtn.textContent = "Send on WhatsApp"; }
+  else { mBtn.href = "#quote"; mBtn.removeAttribute("target"); mBtn.textContent = q ? "Finish quote" : "Get quote"; }
+
+  const book = $("#bookBtn");
+  book.style.display = B.bookingUrl ? "" : "none";
+  if (B.bookingUrl) book.href = B.bookingUrl;
+
+  return { s, q, msg, ready };
+}
+
+/* ===== events ===== */
+$("#qForm").addEventListener("input", render);
+$("#qForm").addEventListener("change", render);
+
+$("#waBtn").addEventListener("click", e => {
+  const { ready } = render();
+  if (!ready) {
+    e.preventDefault();
+    if (!$("#name").value.trim()) $("#fName").classList.add("err");
+    const first = !state().size ? "#sizeOpts" : !state().svc ? "#svcOpts" : "#name";
+    document.querySelector(first).scrollIntoView({ behavior: "smooth", block: "center" });
+    if (first === "#name") setTimeout(() => $("#name").focus({ preventScroll: true }), 350);
+  }
+});
+$("#name").addEventListener("input", () => $("#fName").classList.remove("err"));
+
+$("#copyBtn").addEventListener("click", async () => {
+  const { msg } = render();
+  try { await navigator.clipboard.writeText(msg); toast("Enquiry copied"); }
+  catch { toast("Couldn't copy, open the preview below"); $(".preview").open = true; }
+});
+
+document.addEventListener("click", e => {
+  const pick = e.target.closest("[data-pick]");
+  if (!pick) return;
+  const r = document.getElementById("svc-" + pick.dataset.pick);
+  if (r) { r.checked = true; render(); }
+});
+
+let tt;
+function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => el.classList.remove("on"), 1800); }
+
+// date: no past days
+$("#date").min = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+
+render();
+</script>
+</body>
+</html>
