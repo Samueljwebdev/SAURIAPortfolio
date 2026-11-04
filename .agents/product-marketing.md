@@ -1,6 +1,6 @@
 # Product Marketing Context: Bridge Dental Laboratory
 
-**Document version:** v3.1
+**Document version:** v3.2
 **Last updated:** 2026-11-04
 **Sprint:** BDL-MKT-001
 **Prepared by:** Sauria (for Sam)
@@ -40,7 +40,7 @@ Turnaround is in working days at the lab.
 **Ad wording for turnaround:** use "typically X working days in the lab" and keep the lab's records on file as evidence. Never write "guaranteed". [TBC: confirm Sam can show records, e.g. job tickets, that back each figure]
 
 ### Digital
-**Scanners and portals accepted [Sam]:** iTero, 3Shape (TRIOS), Medit, Dentsply Sirona, Helios, Neo(s), Shining 3D, DEXIS, Eletra, 3DISC, Straumann, R2 Gate, Allied Star, Planmeca. Sam confirms all 14 are intraoral scanners. [TBC: exact brand spelling for "Neos" and "Eletra" before they appear in copy]
+**Scanners and portals accepted [Sam]:** iTero, 3Shape (TRIOS), Medit, Dentsply Sirona, Helios, Neoss, Shining 3D, DEXIS, Eletra, 3DISC, Straumann, R2 Gate, Allied Star, Planmeca. Sam confirms all 14 are intraoral scanners.
 **File format:** STL.
 **Discovery route:** practices can find the lab and connect to it **inside their scanner's portal**. [Sam] This channel costs nothing and needs no ads. [TBC: which portals list the lab as a connectable lab]
 
@@ -241,6 +241,7 @@ Sam confirms the lab has real case photos, permissioned testimonials and numbers
 | 2026-11-04 | Patient and practice audiences never share ads, keywords, copy or pages | Ground rule 5 | All | active |
 
 ## Changelog
+- v3.2 (2026-11-04): Confirmed spellings Neoss and Eletra.
 - v3.1 (2026-11-04): Confirmed Planmeca (not "planes") and that all 14 listed items are scanners.
 - v3 (2026-11-04): Added warranty page and reviews (pasted by Sam). Warranty period varies by appliance (hard nightguard 6 months), conflicting with the "3 months" answer, so it's flagged. Added published remake rules and extra products (MSi, Silensor-SL, fused snoreguard, Zendura FLX, fixed retainer). Noted that only 1 of 6 site reviews is from a practice.
 - v2 (2026-11-04): Added Sam's answers: services and turnaround tiers, 14 scanners (STL), 5-mile collection plus Royal Mail, 3-month warranty, 90% private, family history, churn/return reasons, account-opening routes, 3-month inactive definition. Repositioned from general lab to removable/ortho appliance lab; flagged that the brief's crown and bridge and implant ad themes don't match the service list.
