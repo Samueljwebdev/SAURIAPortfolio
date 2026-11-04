@@ -1,6 +1,6 @@
 # Product Marketing Context: Bridge Dental Laboratory
 
-**Document version:** v2
+**Document version:** v3
 **Last updated:** 2026-11-04
 **Sprint:** BDL-MKT-001
 **Prepared by:** Sauria (for Sam)
@@ -33,6 +33,9 @@ Turnaround is in working days at the lab.
 | **5 working days** | Soft night guards, soft/hard (dual-laminate) night guards, whitening trays, seating jigs, immediate dentures |
 | **7 working days** | Gumshields, hard night guards, B-splint, Dar-al, snore guards, custom appliances |
 
+**Also on the warranty page's appliance list [Site]:** MSi snoreguard, Silensor-SL snoreguard, fused snoreguard, extra-thickness soft-hard nightguard, Zendura A and Zendura FLX retainers, fixed retainer, retainer with pontic, custom gumshields. Hard nightguard is described as "a solid hard-acrylic Michigan / Tanner splint for severe bruxism and TMD." [TBC: turnaround tier for MSi, Silensor-SL, fused snoreguard, fixed retainer, Zendura FLX]
+**Prices:** not published. The site offers "Request a price list." [Site]
+
 **Growth priorities:** **retainers** and **night guards**. [Sam] [TBC: a third priority, if any (aligners?)]
 **Ad wording for turnaround:** use "typically X working days in the lab" and keep the lab's records on file as evidence. Never write "guaranteed". [TBC: confirm Sam can show records, e.g. job tickets, that back each figure]
 
@@ -46,8 +49,25 @@ Turnaround is in working days at the lab.
 - Rest of UK: the **practice posts cases by Royal Mail and pays the postage**.
 - Digital cases need no physical shipping for the impression stage (STL upload). [TBC: how finished appliances are returned, and who pays]
 
-### Warranty / remakes [Sam]
-3-month warranty; cover depends on the cause of damage. [TBC: written terms (what's covered, what's excluded, how to claim) before any ad mentions it]
+### Warranty / remakes [Site: warranty page, pasted by Sam 2026-11-04; URL TBC]
+**Heading on page:** "Every appliance, covered. We stand behind our workmanship."
+**Period varies by appliance**, runs from the date of delivery, subject to fair wear and tear. The only period in the pasted text is **hard nightguard: 6 months from delivery**.
+> ⚠ **Conflict:** Sam's Step 1 answer said a **3-month** warranty, but the site shows **6 months** for the hard nightguard. No ad or page may state a warranty period until Sam confirms the period for each appliance. [TBC: warranty period for each appliance on the page's list]
+
+**Covered:** genuine making fault (poor fit, wrong specification); genuine material failure confirmed on inspection; claim reported within the period with the appliance returned.
+**Not covered:** patient-caused breakage (misuse, heat, dropping, biting in, pets); loss or non-returned appliances; patient symptoms, comfort or clinical outcomes; changes to the patient's teeth after fitting; normal wear and tear; staining; denture repairs and additions (at the lab's discretion).
+**Voids cover:** heat and hot water, warm storage, abrasive or harsh cleaning, uneven force putting in or taking out, forcing an ill-fitting retainer, whitening gel left on, any adjustment by anyone other than the lab, damage, pets, loss.
+**Claims and remakes (published):**
+| Case | Charge |
+|---|---|
+| Lab's fault (making fault or material failure) | **No charge.** Appliance must come back for inspection, with a new scan or impression |
+| Patient breakage | **Half price with a photo, full price if nothing is sent.** One remake per order at the same model |
+| Breaks again | Upgrade to a harder-wearing model: Essix → Zendura A → Zendura FLX; soft → soft-hard → hard (Michigan) |
+| Remake from a model or scan on file | Practice confirms it still matches the patient's teeth; if it doesn't, the remake is chargeable |
+
+> ⚠ **Small inconsistency on the page:** "send the appliance back — or a clear photo" vs "we must have the appliance back to inspect." This is fine if the photo route applies only to patient breakage, but the wording should say so. (Finding for Step 2.)
+
+**Why this matters for marketing:** published remake rules are real evidence of transparent pricing. They support a "clear terms, no surprises" angle (manager persona) and the upgrade path supports "we'll fix the right thing, not the same thing" (owner persona). They don't by themselves prove "no hidden fees", which still needs the price list.
 
 ### Two audiences, kept apart (ground rule 5)
 | | **Practice audience (this sprint)** | **Patient audience (kept, out of scope for ads)** |
@@ -74,7 +94,7 @@ Turnaround is in working days at the lab.
 ## Personas (HYPOTHESES, not yet confirmed)
 | Persona | Cares about | Challenge | Value we promise |
 |---|---|---|---|
-| **Owner / principal dentist** | Fit, consistency, remakes, chair time, patient experience | Poor-quality cheaper labs mean refits and remakes | Family lab with 3 generations of technicians; DAMAS; 3-month warranty [TBC terms]; real case photos |
+| **Owner / principal dentist** | Fit, consistency, remakes, chair time, patient experience | Poor-quality cheaper labs mean refits and remakes | Family lab with 3 generations of technicians; DAMAS; published warranty and remake rules; real case photos |
 | **Practice manager** | Turnaround, collection/postage, invoicing, case tracking, one point of contact | Chasing cases; unexpected charges on invoices | Typically 3, 5 or 7 working days by product; STL from the practice's scanner; fees agreed upfront [TBC: can "no hidden fees" be stated?]; named contact [TBC] |
 
 ---
@@ -97,6 +117,21 @@ Turnaround is in working days at the lab.
 | Why they come back | "the quality was poor", "hidden fees" (at the other lab) | Sam, reporting practices |
 | Complaints | "No real complaints" | Sam |
 
+### Reviews shown on the site [Site: /reviews/ section, pasted by Sam]
+Heading: *"Rated excellent on Google by the practices and patients we work with."* Six 5-star Google reviews are shown; **only one is clearly from a practice**:
+| Review | Audience |
+|---|---|
+| "Used Bridge for our practice's lab work for years — reliable, accurate and easy to deal with." | **Practice** (only one) |
+| "Phoned at the weekend for a denture repair for my nan — repaired within the hour." | Patient |
+| "Needed my dentures fixing after they broke in half. Fantastic job, and they cleaned them for free too." | Patient |
+| "Service exemplary, speed and costing extremely reasonable. They even offered to deliver." | Unclear (likely patient) |
+| "Brilliant, friendly service and a quick turnaround." | Unclear |
+| "Quick, professional and great value." | Unclear |
+
+**Practice phrases to use (verbatim, one source):** "reliable, accurate and easy to deal with", "for years".
+**Rules:** patient reviews must not appear in practice ads or on the practice landing page (ground rule 5). Any review quoted in an ad must be genuine, traceable to the Google listing, and not edited to change its meaning (CAP Code). [TBC: link to each review on Google; more practice reviews, ideally with practice name and permission]
+> ⚠ Directory hours are Mon–Fri, but one patient review mentions a weekend phone call. [TBC: is there weekend or emergency patient cover?] This matters for the patient journey, not the practice ads.
+
 **Implication:** The strongest angle is not "cheapest". It is **"the real cost of a cheap lab"**: quality that fits first time and pricing without surprises, backed by long-standing accounts. Every claim needs evidence: "competitive prices" needs a basis for comparison, and "no hidden fees" needs a published price list or written terms.
 
 ---
@@ -114,7 +149,7 @@ Turnaround is in working days at the lab.
 - **Stated turnaround by product:** 3, 5 or 7 working days.
 - **Broad scanner compatibility:** 14 named scanners and portals, STL.
 - **Long-standing accounts:** practices with the lab for 15+ years. [Sam] [TBC: how many, for an evidenced claim]
-- **3-month warranty.** [TBC: terms]
+- **Published warranty and remake rules:** free remake for the lab's faults; set rates for patient breakage; an upgrade path when an appliance keeps breaking. Periods vary by appliance [TBC: periods; conflict with "3 months"].
 
 ---
 
@@ -124,7 +159,8 @@ Turnaround is in working days at the lab.
 | "We're happy with our current lab." | Low-risk first case [TBC: is there a first-case offer?] |
 | "You're in Dorset; we're not." | Send STL from your scanner, or post by Royal Mail; typically 3–7 working days in the lab |
 | "Do you take our scanner's files?" | 14 scanners/portals listed; STL |
-| "What if it doesn't fit?" | 3-month warranty [TBC: terms] |
+| "What if it doesn't fit?" | A genuine making fault is remade at no charge once the appliance is returned for inspection; terms are published [Site] |
+| "Patients keep breaking them." | Half-price remake with a photo; repeat breakers are moved up to a harder-wearing model [Site] |
 | "Another lab is cheaper." | Competitive prices, no surprises on the invoice [TBC: evidence]; practices that switched for price came back [Sam, anecdotal; not for ads without evidence] |
 
 **Anti-persona:** patients (served separately), dental students and job seekers, non-dental practice managers, and practices looking for crown and bridge or implant work [TBC], plus NHS-volume practices if the goal is more private work.
@@ -205,15 +241,21 @@ Sam confirms the lab has real case photos, permissioned testimonials and numbers
 | 2026-11-04 | Patient and practice audiences never share ads, keywords, copy or pages | Ground rule 5 | All | active |
 
 ## Changelog
+- v3 (2026-11-04): Added warranty page and reviews (pasted by Sam). Warranty period varies by appliance (hard nightguard 6 months), conflicting with the "3 months" answer, so it's flagged. Added published remake rules and extra products (MSi, Silensor-SL, fused snoreguard, Zendura FLX, fixed retainer). Noted that only 1 of 6 site reviews is from a practice.
 - v2 (2026-11-04): Added Sam's answers: services and turnaround tiers, 14 scanners (STL), 5-mile collection plus Royal Mail, 3-month warranty, 90% private, family history, churn/return reasons, account-opening routes, 3-month inactive definition. Repositioned from general lab to removable/ortho appliance lab; flagged that the brief's crown and bridge and implant ad themes don't match the service list.
 - v1 (2026-11-04): Initial draft from the brief and public records; site not readable.
 
 ---
 
-# Open items after Sam's answers (2026-11-04)
+# Open items (updated 2026-11-04, after warranty page and reviews)
 
-**Blocker for Step 2:** `www.bridgedentallab.co.uk` is still blocked by this session's network policy. Allow it in the environment's network settings, or paste the page text.
+**Blocker for Step 2:** `www.bridgedentallab.co.uk` is still blocked by this session's network policy. Allow it in the environment's network settings, or paste the text (with the URL) of: home, services/products, about, contact, the portal sign-up / new-account page, the send-a-case page, and the warranty page's URL.
 
-**Decision needed:** The brief's Google ad groups include *crown and bridge* and *implants*, but the lab's service list is removable and orthodontic appliances. Proposed themes instead: retainers (Essix/Zendura), night guards/bruxism splints, clear aligners, digital/STL scan cases, and dentures for practices.
+**Proposed Google ad themes (only services the lab offers):** retainers (Essix/Zendura), night guards and bruxism splints, snore guards, clear aligners, digital/STL scan cases, dentures for practices. No crown and bridge or implant ad groups unless Sam says the lab offers them.
 
-**Still TBC (for evidence on file before ads run):** DAMAS/ISO certificate numbers and dates; one document showing trading since 1978; written 3-month warranty terms; turnaround records; basis for "competitive prices" and any "no hidden fees" claim; testimonials, case photos and numbers (confirmed to exist, not yet supplied); correct names for "Neos", "Eletra", "Helios" and "planes" (Planmeca?); which scanner portals list the lab; return shipping of finished cases; price list / whether prices appear in ads; target CPA inputs (average monthly value per practice, margin); capacity for new accounts.
+**Conflicts to resolve:**
+- Warranty: Sam said 3 months, but the site shows 6 months for the hard nightguard. What is the period for each appliance?
+- Claim route: the site says "send the appliance back — or a clear photo" in one place and "we must have the appliance back" in another.
+- Weekend cover: a patient review mentions a weekend call, but directory hours are Mon–Fri.
+
+**Still TBC (evidence on file before ads run):** DAMAS/ISO certificate numbers and dates; one document showing trading since 1978; turnaround records; price list and basis for "competitive prices" / "no hidden fees"; case photos, more practice testimonials (Google links, permission), numbers (active practices, 15+ year accounts); correct scanner names ("Neos", "Eletra", "Helios", "planes"); turnaround tier for MSi, Silensor-SL, fused snoreguard, fixed retainer, Zendura FLX; which scanner portals list the lab; return shipping; target CPA inputs; capacity for new accounts.
