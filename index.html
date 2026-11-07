@@ -41,7 +41,7 @@ nav ul a:hover{text-decoration:underline;text-underline-offset:4px}
 .nav-cta{font-weight:600}
 @media(max-width:720px){nav ul li:not(:last-child){display:none}}
 
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--gutter);align-items:end;padding:clamp(48px,8vw,110px) 0 clamp(48px,7vw,96px)}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:var(--gutter);align-items:center;padding:clamp(40px,6vw,80px) 0 clamp(48px,7vw,96px)}
 .hero h1{font-size:clamp(56px,8.6vw,132px);margin-top:18px}
 .hero p.lede{max-width:34em;margin-top:28px;font-size:clamp(18px,1.6vw,21px)}
 .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
@@ -50,9 +50,9 @@ nav ul a:hover{text-decoration:underline;text-underline-offset:4px}
 .btn-dark:hover{background:#000}
 .btn-line{border:1px solid var(--ink)}
 .btn-line:hover{background:var(--ink);color:var(--paper)}
-.hero figure img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.hero figure img{width:100%;height:min(72vh,720px);object-fit:cover;object-position:50% 78%}
 figcaption{margin-top:10px}
-@media(max-width:860px){.hero{grid-template-columns:1fr}.hero figure img{aspect-ratio:4/5}}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.hero figure img{height:auto;aspect-ratio:4/5}}
 
 section{padding:clamp(64px,9vw,128px) 0;border-top:1px solid var(--line)}
 .section-head{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);margin-bottom:clamp(40px,5vw,72px)}
