@@ -73,11 +73,13 @@ a{color:inherit;text-decoration:none}button{font-family:inherit;border:none;curs
    HERO — FULL BLEED VIDEO, SPECIMEN CHROME
 ══════════════════════════════════════════ */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 80px;overflow:hidden;background:#0e0e0e}
+.hero-head{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block;opacity:0;transition:opacity 1.2s ease}
+.hero-head.on{opacity:1}
 .hero-video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden}
 .hero-video-wrap video{width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity 1.2s ease}
 .hero-video-wrap video.loaded{opacity:1}
 .hero-video-fallback{position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,#141414 0%,#1a1917 40%,#0e0e0e 100%)}
-.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,.5) 35%,rgba(10,10,10,.15) 65%,rgba(10,10,10,.35) 100%)}
+.hero-overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(0deg,rgba(10,10,10,.85) 0%,rgba(10,10,10,.35) 30%,rgba(10,10,10,0) 55%)}
 .hero-grain{position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.3}
 .hero-accent-line{position:absolute;top:0;left:0;right:0;height:2px;background:var(--red);z-index:3;transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease-out-expo) .3s}
 .hero-accent-line.on{transform:scaleX(1)}
@@ -316,6 +318,7 @@ a{color:inherit;text-decoration:none}button{font-family:inherit;border:none;curs
   .btn{text-align:center}
 }
 @media(max-width:480px){.about-stats{gap:28px}}
+@media (max-width:760px){.hero-spec{display:none}}
 </style></head>
 <body>
 
@@ -368,12 +371,7 @@ a{color:inherit;text-decoration:none}button{font-family:inherit;border:none;curs
   HERO — VIDEO + SPECIMEN CHROME
 ════════════════════════════════════ -->
 <section class="hero" id="hero">
-  <div class="hero-video-wrap" id="heroVideoWrap">
-    <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="/reel-poster.jpg" aria-hidden="true">
-      <source src="/reel-2026.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="hero-video-fallback" id="heroFallback"></div>
+  <canvas class="hero-head" id="headStage" aria-hidden="true"></canvas>
   <div class="hero-overlay"></div>
   <svg class="hero-grain" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
@@ -391,7 +389,7 @@ a{color:inherit;text-decoration:none}button{font-family:inherit;border:none;curs
   </div>
 
   <div class="hero-side">SAURIA_STUDIO // 2026</div>
-  <div class="hero-reel-label" id="heroReelLabel">HIGHLIGHT REEL // 2026</div>
+  <div class="hero-reel-label" id="heroReelLabel">SPECIMEN 001 // THE SAURIA HEAD</div>
 
   <div class="hero-content">
     <div class="hero-eyebrow" id="heroEyebrow">
@@ -957,5 +955,82 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     }
   });
 })();
+</script>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+/* The SAURIA head: particles sampled from head.glb, turns toward the cursor, red seam down the face. */
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {MeshSurfaceSampler} from 'three/addons/math/MeshSurfaceSampler.js';
+import {mergeVertices} from 'three/addons/utils/BufferGeometryUtils.js';
+const canvas=document.getElementById('headStage'),hero=document.getElementById('hero');
+if(canvas){
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let renderer;
+try{renderer=new THREE.WebGLRenderer({canvas,antialias:true})}catch(e){renderer=null}
+if(renderer){
+const isMobile=()=>innerWidth<760;
+renderer.setPixelRatio(Math.min(devicePixelRatio,isMobile()?1.5:2));
+renderer.setClearColor(0x0e0e0e,1);
+const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(32,1,.1,100);
+const rig=new THREE.Group();scene.add(rig);
+const uniforms={uTime:{value:0},uMouse:{value:new THREE.Vector2(9,9)},uReveal:{value:0},uPixel:{value:renderer.getPixelRatio()},uVel:{value:0},uLag:{value:new THREE.Vector2()}};
+const pointsMat=new THREE.ShaderMaterial({uniforms,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
+vertexShader:`uniform float uTime,uReveal,uPixel,uVel;uniform vec2 uMouse,uLag;attribute float aSeed;varying float vHot;varying float vA;varying float vSeam;
+void main(){vec3 p=position;
+float sx=0.06+0.025*sin(p.y*9.0)+0.012*sin(p.y*23.0);vSeam=smoothstep(0.026,0.0,abs(p.x-sx))*step(0.0,p.z+0.15);
+vec3 q=p*2.2;vec3 flow=vec3(sin(q.y*1.7+uTime*0.55+aSeed*6.0)+sin(q.z*2.9-uTime*0.40),sin(q.z*1.9+uTime*0.50+aSeed*4.0)+sin(q.x*2.3+uTime*0.35),sin(q.x*2.1+uTime*0.60+aSeed*5.0)+sin(q.y*3.1-uTime*0.45));
+p+=flow*(0.007+uVel*0.055*(0.3+aSeed));
+vec4 mv=modelViewMatrix*vec4(p,1.0);vec4 clip=projectionMatrix*mv;vec2 ndc=clip.xy/clip.w;
+float d=distance(ndc,uMouse);vHot=smoothstep(0.32,0.0,d);
+vec2 toM=ndc-uMouse+1e-5;mv.xy+=normalize(vec2(-toM.y,toM.x))*vHot*0.08*(0.4+aSeed)+normalize(toM)*vHot*0.05;
+mv.xy-=uLag*(0.2+aSeed*aSeed*1.2);
+float r=smoothstep(aSeed*0.6,aSeed*0.6+0.4,uReveal);mv.y-=(1.0-r)*1.5;mv.x+=(1.0-r)*(aSeed-0.5)*2.0;vA=r;
+gl_Position=projectionMatrix*mv;gl_PointSize=(1.5+aSeed*1.5+vHot*2.4)*uPixel*(6.0/-mv.z);}`,
+fragmentShader:`varying float vHot;varying float vA;varying float vSeam;
+void main(){vec2 c=gl_PointCoord-0.5;if(dot(c,c)>0.25)discard;vec3 col=mix(vec3(0.95,0.94,0.92),vec3(0.886,0.188,0.157),max(vHot,vSeam));gl_FragColor=vec4(col,(0.62+max(vHot,vSeam)*0.38)*vA);}`});
+const wireMat=new THREE.ShaderMaterial({uniforms,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
+vertexShader:`uniform vec2 uMouse;varying float vHot;void main(){vec4 clip=projectionMatrix*modelViewMatrix*vec4(position,1.0);vHot=smoothstep(0.35,0.0,distance(clip.xy/clip.w,uMouse));gl_Position=clip;}`,
+fragmentShader:`uniform float uReveal;varying float vHot;void main(){vec3 col=mix(vec3(0.95,0.94,0.92),vec3(0.886,0.188,0.157),vHot);gl_FragColor=vec4(col,(0.035+vHot*0.3)*smoothstep(0.5,1.0,uReveal));}`});
+function build(geo){
+  geo=geo.index?geo:mergeVertices(geo);geo.computeBoundingBox();
+  const size=new THREE.Vector3(),ctr=new THREE.Vector3();geo.boundingBox.getSize(size);geo.boundingBox.getCenter(ctr);
+  geo.translate(-ctr.x,-ctr.y,-ctr.z);const s=2.35/Math.max(size.x,size.y,size.z);geo.scale(s,s,s);geo.computeVertexNormals();
+  const core=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0x0e0e0e}));core.scale.setScalar(0.955);core.renderOrder=-1;rig.add(core);
+  const sampler=new MeshSurfaceSampler(new THREE.Mesh(geo)).build();
+  const N=isMobile()?8000:16000,pos=new Float32Array(N*3),seed=new Float32Array(N),v=new THREE.Vector3();
+  for(let i=0;i<N;i++){sampler.sample(v);pos.set([v.x,v.y,v.z],i*3);seed[i]=Math.random()}
+  const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));pg.setAttribute('aSeed',new THREE.BufferAttribute(seed,1));
+  rig.add(new THREE.Points(pg,pointsMat));rig.add(new THREE.LineSegments(new THREE.WireframeGeometry(geo),wireMat));
+  canvas.classList.add('on');
+}
+new GLTFLoader().load('/head.glb',g=>{let geo=null;g.scene.updateMatrixWorld(true);g.scene.traverse(o=>{if(o.isMesh&&!geo){geo=o.geometry.clone();geo.applyMatrix4(o.matrixWorld)}});if(geo)build(geo)});
+const target=new THREE.Vector2(),mouseNdc=new THREE.Vector2(9,9);
+addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();target.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height*2-1));mouseNdc.copy(target)});
+document.addEventListener('pointerleave',()=>{target.set(0,0);mouseNdc.set(9,9)});
+addEventListener('deviceorientation',e=>{if(e.gamma==null)return;target.set(THREE.MathUtils.clamp(e.gamma/30,-1,1),THREE.MathUtils.clamp(-(e.beta-45)/30,-1,1))});
+let baseX=0,baseY=0;
+function resize(){const w=hero.clientWidth,h=hero.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;
+  if(w<760){camera.position.z=9.5;baseX=0;baseY=1.05}else{camera.position.z=6.2;baseX=Math.min(1.9,camera.aspect*0.88);baseY=0.25}
+  camera.position.set(0,0,camera.position.z);camera.updateProjectionMatrix()}
+addEventListener('resize',resize);resize();
+let visible=true;new IntersectionObserver(es=>{visible=es[0].isIntersecting}).observe(hero);
+const boot=document.getElementById('boot');const still=location.search.includes('still');let started=still,reveal=still?1:0;
+const clock=new THREE.Clock(),cur=new THREE.Vector2(),prevT=new THREE.Vector2();let vel=0;
+renderer.setAnimationLoop(()=>{
+  if(!visible)return;
+  const t=clock.getElapsedTime();
+  if(!started&&(!boot||boot.classList.contains('out')))started=true;
+  if(started)reveal=Math.min(1,reveal+(reduce?1:0.012));
+  uniforms.uTime.value=reduce?0:t;uniforms.uReveal.value=reveal;
+  const sp0=Math.min(1,target.distanceTo(prevT)*14);prevT.copy(target);vel+=(sp0-vel)*(sp0>vel?0.25:0.03);uniforms.uVel.value=reduce?0:vel;
+  cur.lerp(target,0.045);uniforms.uLag.value.set((target.x-cur.x)*0.55,(target.y-cur.y)*0.4);
+  rig.rotation.y=(baseX>0?-0.5:-0.12)+cur.x*0.6+(reduce?0:Math.sin(t*0.25)*0.04);rig.rotation.x=-cur.y*0.3;
+  rig.position.set(baseX,baseY+Math.sin(t*0.6)*0.04,0);
+  uniforms.uMouse.value.lerp(mouseNdc,0.2);renderer.render(scene,camera);
+});
+}}
 </script>
 </body></html>
