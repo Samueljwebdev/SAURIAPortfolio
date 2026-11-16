@@ -220,3 +220,16 @@ footer a{color:#fff}
 .c-lilac{color:var(--lilac)}.c-blue{color:var(--blue)}.self-start{align-self:flex-start}.bg-lilac{background:var(--lilac)}.bg-blue{background:var(--blue)}.grid-18{display:grid;gap:18px}.mb-0{margin-bottom:0}
 .legal{padding:48px 0 72px}.legal h1{font-size:clamp(36px,6vw,56px);margin:12px 0}.legal h2{font-size:22px;margin:32px 0 8px}.legal p{max-width:64ch;line-height:1.65;margin:0 0 12px}.legal a{text-decoration:underline}
 footer .wrap span:last-child a+a{margin-left:16px}
+
+/* Full Growth rewrite, Nov 2026 */
+.btn-ghost-dark{border:2px solid var(--ink,#14123A);color:var(--ink,#14123A);background:transparent}
+.hero-about .wrap{grid-template-columns:1fr}
+.hero-about h1{max-width:13em}
+.cv-section{background:var(--page)}
+.cv{display:flex;flex-direction:column;border-top:2px solid var(--lilac)}
+.cv-row{display:grid;grid-template-columns:180px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}
+.cv-when{font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);padding-top:4px}
+.cv-row h3{font-size:24px;letter-spacing:-.02em;line-height:1.15}
+.cv-row p{margin-top:8px;max-width:46em;color:var(--muted)}
+.cv-row a{color:var(--blue);text-decoration:underline}
+@media (max-width:560px){.cv-row{grid-template-columns:1fr;gap:6px}}

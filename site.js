@@ -14,15 +14,18 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
 }})},{threshold:.15});
 document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 
-var vid=document.getElementById('vid'),player=document.getElementById('player');
-document.getElementById('playBtn').addEventListener('click',function(){player.classList.add('on');vid.controls=true;vid.play();track('video_played')});
+var vid=document.getElementById('vid'),player=document.getElementById('player'),playBtn=document.getElementById('playBtn');
+if(vid&&player&&playBtn){
+playBtn.addEventListener('click',function(){player.classList.add('on');vid.controls=true;vid.play();track('video_played')});
 vid.addEventListener('play',function(){player.classList.add('on')});
 vid.addEventListener('ended',function(){track('video_finished')});
+}
 
-document.getElementById('checkForm').addEventListener('submit',function(e){
+var form=document.getElementById('checkForm');
+if(form)form.addEventListener('submit',function(e){
   e.preventDefault();
   var f=e.target,url=f.url.value.trim(),email=f.email.value.trim(),note=document.getElementById('note');
-  if(!url){note.textContent='Add the address of the page you want checked.';f.url.focus();return}
+  if(!url){note.textContent='Add your website address so I know what to look at.';f.url.focus();return}
   if(!/^\S+@\S+\.\S+$/.test(email)){note.textContent='Add an email address so I can send the fixes back.';f.email.focus();return}
   var want=f.want.value;
   track('form_submitted',{form_type:want});
